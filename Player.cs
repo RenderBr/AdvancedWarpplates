@@ -1,4 +1,5 @@
-﻿using TShockAPI;
+﻿using Microsoft.Xna.Framework;
+using TShockAPI;
 
 namespace AdvancedWarpplates
 {
@@ -82,11 +83,11 @@ namespace AdvancedWarpplates
 
             TimeStandingOnWarpplate++;
             if ((warpplate.Delay - TimeStandingOnWarpplate) > 0)
-                TSPlayer.SendInfoMessage("You will be warped to " + destinationWarpplate.Label + " in " + (warpplate.Delay - TimeStandingOnWarpplate) + " seconds");
+                TSPlayer.SendMessage("Sending you to " + destinationWarpplate.Label + " in " + (warpplate.Delay - TimeStandingOnWarpplate) + " seconds", new Microsoft.Xna.Framework.Color(140, 85, 242));
             else
             {
                 if (TSPlayer.Teleport((int)(destinationWarpplate.WarpplatePos.X * 16) + 2, (int)(destinationWarpplate.WarpplatePos.Y * 16) + 3))
-                    TSPlayer.SendInfoMessage("You have been warped to " + destinationWarpplate.Label + " via a Warpplate");
+                    TSPlayer.SendInfoMessage("You have been sent to " + destinationWarpplate.Label + "!", Color.LightGreen);
                 TimeStandingOnWarpplate = 0;
                 HasJustUsedWarpplate = true;
                 WarpplateUseCooldown = 3;
@@ -101,7 +102,7 @@ namespace AdvancedWarpplates
         {
             TimeStandingOnWarpplate++;
             if ((warpplate.Delay - TimeStandingOnWarpplate) > 0)
-                TSPlayer.SendInfoMessage("Shifting to " + warpplate.Label + " in " + (warpplate.Delay - TimeStandingOnWarpplate) + " seconds");
+                TSPlayer.SendInfoMessage("Transferring you to " + warpplate.Label + " in " + (warpplate.Delay - TimeStandingOnWarpplate) + " seconds", new Microsoft.Xna.Framework.Color(140, 85, 242));
             else
             {
                 SendToDimension(warpplate.Destination);
