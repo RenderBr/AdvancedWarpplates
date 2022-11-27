@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using TShockAPI;
 
 namespace AdvancedWarpplates
@@ -80,17 +81,25 @@ namespace AdvancedWarpplates
                 TShock.Log.ConsoleError("AdvancedWarpplates: Player is null");
                 return;
             }
+            if(destinationWarpplate == null)
+            {
+                return;
+            }
 
             TimeStandingOnWarpplate++;
-            if ((warpplate.Delay - TimeStandingOnWarpplate) > 0)
+
+            if ((warpplate?.Delay - TimeStandingOnWarpplate) > 0)
                 TSPlayer.SendMessage("Sending you to " + destinationWarpplate.Label + " in " + (warpplate.Delay - TimeStandingOnWarpplate) + " seconds", new Microsoft.Xna.Framework.Color(140, 85, 242));
             else
             {
                 if (TSPlayer.Teleport((int)(destinationWarpplate.WarpplatePos.X * 16) + 2, (int)(destinationWarpplate.WarpplatePos.Y * 16) + 3))
                     TSPlayer.SendInfoMessage("You have been sent to " + destinationWarpplate.Label + "!", Color.LightGreen);
                 TimeStandingOnWarpplate = 0;
+
                 HasJustUsedWarpplate = true;
+
                 WarpplateUseCooldown = 3;
+
             }
         }
 
