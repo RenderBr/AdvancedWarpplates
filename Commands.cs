@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using TShockAPI;
+﻿using Microsoft.Xna.Framework;
+using System;
 using Terraria;
+using TShockAPI;
 
 namespace AdvancedWarpplates
 {
@@ -305,8 +305,8 @@ namespace AdvancedWarpplates
             }
 
             string regionName = String.Join(" ", args.Parameters);
-            var x = ((((int)args.Player.X) / 16) - 1);
-            var y = (((int)args.Player.Y) / 16);
+            var x = (((int)args.Player.X) / 16) - 1;
+            var y = ((int)args.Player.Y) / 16;
             var width = 2;
             var height = 3;
 
@@ -420,7 +420,7 @@ namespace AdvancedWarpplates
             {
                 args.Player.SendSuccessMessage("Warpplates are now turned off for you");
             }
-                
+
             Players[args.Player.Index].CanUseWarpplates = !Players[args.Player.Index].CanUseWarpplates;
         }
     }

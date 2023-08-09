@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using TShockAPI;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+using TShockAPI;
 
 namespace AdvancedWarpplates
 {
@@ -14,7 +14,7 @@ namespace AdvancedWarpplates
     public class WarpplateManager
     {
         private WarpplateDB Database;
-        private List<Warpplate> Warpplates = new List<Warpplate>();
+        private List<Warpplate> Warpplates = new();
 
         public WarpplateManager(IDbConnection db)
         {

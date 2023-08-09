@@ -1,21 +1,19 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
 using Terraria;
 using TShockAPI;
 using TShockAPI.DB;
-using MySql.Data.MySqlClient;
-using System.Threading;
-using System.Data;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using System.Threading.Tasks;
 
 namespace AdvancedWarpplates
 {
     public class WarpplateDB
     {
         private IDbConnection database;
-        private object syncLock = new object();
+        private object syncLock = new();
 
         public WarpplateDB(IDbConnection db)
         {
@@ -99,7 +97,7 @@ namespace AdvancedWarpplates
 
         public async Task<List<Warpplate>> ReloadAllWarpplates()
         {
-            List<Warpplate> warpplates = new List<Warpplate>();
+            List<Warpplate> warpplates = new();
 
             try
             {
@@ -121,7 +119,7 @@ namespace AdvancedWarpplates
 
                         string[] splitids = mergedids.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-                        Warpplate r = new Warpplate(new Vector2(X1, Y1), new Rectangle(X1, Y1, width, height), name, warpdest, Protected != 0, Main.worldID.ToString(), label, type);
+                        Warpplate r = new(new Vector2(X1, Y1), new Rectangle(X1, Y1, width, height), name, warpdest, Protected != 0, Main.worldID.ToString(), label, type);
                         r.Delay = Delay;
 
                         try
@@ -167,7 +165,7 @@ namespace AdvancedWarpplates
             }
             catch (Exception ex)
             {
-				TShock.Log.Error(ex.ToString());
+                TShock.Log.Error(ex.ToString());
             }
             return false;
         }
@@ -191,7 +189,7 @@ namespace AdvancedWarpplates
             }
             catch (Exception ex)
             {
-				TShock.Log.Error(ex.ToString());
+                TShock.Log.Error(ex.ToString());
             }
 
             return false;
@@ -208,7 +206,7 @@ namespace AdvancedWarpplates
             }
             catch (Exception ex)
             {
-				TShock.Log.Error(ex.ToString());
+                TShock.Log.Error(ex.ToString());
             }
 
             return false;

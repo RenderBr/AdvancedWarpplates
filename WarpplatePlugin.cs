@@ -12,11 +12,8 @@ namespace AdvancedWarpplates
     {
         public Player[] Players = new Player[256];
         public WarpplateManager Manager;
-        public Timer QuickUpdate = new Timer(1000);
+        public Timer QuickUpdate = new(1000);
         public Commands Commands;
-
-        private DateTime LastCheck = DateTime.UtcNow;
-
         public override string Name
         {
             get { return "Warpplate"; }
@@ -101,7 +98,7 @@ namespace AdvancedWarpplates
             TShockAPI.Commands.ChatCommands.Add(new Command("warpplate.set", Commands.SetWarpplateLabel, "swpl"));
             TShockAPI.Commands.ChatCommands.Add(new Command("warpplate.setdimensional", Commands.SetWarpplateDimension, "swpdim"));
         }
-        
+
         /// <summary>
         /// Creates a new player object when a player joins
         /// </summary>
@@ -135,24 +132,18 @@ namespace AdvancedWarpplates
         {
             lock (Players)
             {
-                for (int i = 0; i < Players.Length; i++)
+                foreach (Player player in Players)
                 {
-                    Player player = Players[i];
-                    if (player == null || player.TSPlayer == null)
+                    if (player?.TSPlayer != null && player.TSPlayer.Group.HasPermission("warpplate.use") && player.CanUseWarpplates)
                     {
-                        continue;
-                    }
-
-                    try
-                    {
-                        if (player.TSPlayer.Group.HasPermission("warpplate.use") && player.CanUseWarpplates)
+                        try
                         {
                             player.Update();
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        TShock.Log.Error(ex.ToString());
+                        catch (Exception ex)
+                        {
+                            TShock.Log.Error(ex.ToString());
+                        }
                     }
                 }
             }

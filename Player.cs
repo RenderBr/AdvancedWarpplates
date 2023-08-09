@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 using TShockAPI;
 
 namespace AdvancedWarpplates
@@ -44,7 +43,7 @@ namespace AdvancedWarpplates
                 TimeStandingOnWarpplate = 0;
                 HasJustUsedWarpplate = false;
             }
-            else if(!HasJustUsedWarpplate)
+            else if (!HasJustUsedWarpplate)
             {
                 CheckAndUseWarpplate(warpplateName);
             }
@@ -58,7 +57,7 @@ namespace AdvancedWarpplates
         {
             var warpplate = Manager.GetWarpplateByName(warpplateName);
 
-            switch(warpplate.Type)
+            switch (warpplate.Type)
             {
                 case 0:
                     var destinationWarpplate = Manager.GetWarpplateByName(warpplate.Destination);
@@ -77,11 +76,12 @@ namespace AdvancedWarpplates
         /// <param name="destinationWarpplate">The destination warpplate they are attempting to go to</param>
         private void CheckAndUseDestinationWarpplate(Warpplate warpplate, Warpplate destinationWarpplate)
         {
-            if (TSPlayer == null) {
+            if (TSPlayer == null)
+            {
                 TShock.Log.ConsoleError("AdvancedWarpplates: Player is null");
                 return;
             }
-            if(destinationWarpplate == null)
+            if (destinationWarpplate == null)
             {
                 return;
             }
@@ -127,7 +127,7 @@ namespace AdvancedWarpplates
         /// <param name="dimension">The name of the dimension to send them to</param>
         private void SendToDimension(string dimension)
         {
-            byte[] data = (new PacketFactory())
+            byte[] data = new PacketFactory()
                         .SetType(67)
                         .PackInt16(2)
                         .PackString(dimension)
